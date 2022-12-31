@@ -12,8 +12,8 @@ class JobSeekerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only('index, show, destroy, update');
-        $this->middleware(RestrictAdminOnly::class)->only('index, destroy');    
+        $this->middleware('auth:sanctum')->only(['index', 'show', 'destroy', 'update']);
+        $this->middleware(RestrictAdminOnly::class)->only('index');    
     }
 
     /**
@@ -23,12 +23,6 @@ class JobSeekerController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('admin-only')) {
-            return response()->json([
-                'success' => 'false',
-                'message' => 'Permission denied: admin access only' 
-            ], 401);
-        }
         return JobSeeker::all();
     }
 
