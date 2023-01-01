@@ -11,7 +11,7 @@ class CompanyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['index', 'destroy', 'update']);
+        $this->middleware('auth:sanctum')->only(['destroy', 'update']);
         $this->middleware(RestrictAdminOnly::class)->only(['store', 'destroy']);    
     }
     /**
