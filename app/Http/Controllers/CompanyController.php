@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['index', 'destroy', 'update']);
+        $this->middleware(RestrictAdminOnly::class)->only(['store', 'destroy']);    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +34,7 @@ class CompanyController extends Controller
     {
         $data = $request->all();
         $company = Company::createEntry($data);
+        echo 'store';
         return $company;
     }
 
@@ -52,6 +59,11 @@ class CompanyController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        if ($id != $request->user()->id) {
+            return response()->json([
+               'message' => 'Permission denied' 
+            ], 401);
+        }
         $company = Company::findOrFail($id);
         $company->update($request->all());
         return $company;
