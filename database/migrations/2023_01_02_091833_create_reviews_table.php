@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->text('text');
+            $table->integer('rating')->default(5);
+            $table->foreignId('jobseeker_id')->constrained('job_seekers');
+            $table->foreignId('job_id')->constrained('jobs');
             $table->timestamps();
         });
     }

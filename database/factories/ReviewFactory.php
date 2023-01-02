@@ -17,7 +17,8 @@ class ReviewFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'text' => fake()->text(),
+            'ratings' => fake()->numberBetween(0, 5)
         ];
     }
 }

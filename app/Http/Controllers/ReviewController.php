@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewStoreRequest;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+
+    public function __construct()
+    {
+            
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        return Review::all();
     }
 
     /**
@@ -23,9 +29,11 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewStoreRequest $request)
     {
-        //
+        $data = $request->all();
+        $review = Review::create($data);
+        return $review;
     }
 
     /**
@@ -36,7 +44,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        return $review;
     }
 
     /**
@@ -48,7 +56,8 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $review->update($request->all());
+        return $review;
     }
 
     /**
@@ -59,6 +68,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return response()->json(["success" => "true"], 204);
     }
 }
