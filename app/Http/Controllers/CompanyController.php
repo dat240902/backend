@@ -22,7 +22,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        return Company::with('images')::all();
     }
 
     /**
@@ -35,7 +35,6 @@ class CompanyController extends Controller
     {
         $data = $request->all();
         $company = Company::createEntry($data);
-        echo 'store';
         return $company;
     }
 

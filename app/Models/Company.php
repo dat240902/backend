@@ -25,6 +25,10 @@ class Company extends Authenticatable
         return $this->hasMany(Job::class);
     }
 
+    public function images() {
+        return $this->hasMany(CompanyImage::class);
+    }
+
     public static function createEntry($data) {
         $data['password'] = Hash::make($data['password']);
         return Company::create($data);

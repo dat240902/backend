@@ -2,11 +2,25 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$host = $url["host"] ?? null;
-$username = $url["user"] ?? null;
-$password = $url["pass"] ?? null;
-$database = substr($url["path"], 1);
+// $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+// $host = $url["host"] ?? getenv('DB_HOST');
+// $username = $url["user"] ?? getenv('DB_USERNAME');
+// $password = $url["pass"] ?? getenv('DB_PASSWORD');
+// $database = $url ? substr($url["path"], 1) : getenv('DB_DATABASE');
+
+if (getenv("CLEARDB_DATABASE_URL")) {
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $host = $url["host"] ?? null;
+    $username = $url["user"] ?? null;
+    $password = $url["pass"] ?? null;
+    $database = substr($url["path"], 1) ?? null;
+}
+else {
+    $host = getenv('DB_HOST');
+    $username = getenv('DB_USERNAME');
+    $password = getenv('DB_PASSWORD');
+    $database = getenv('DB_DATABASE');
+}
 
 return [
 
