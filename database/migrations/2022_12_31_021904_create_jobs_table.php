@@ -37,9 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('reviews', function ($table) {
-            $table->dropForeign('reviews_job_id_foreign');
-        });
         Schema::dropIfExists('jobs');
     }
 };

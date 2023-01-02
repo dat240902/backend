@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('company_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->references('companies');
+            $table->foreignId('company_id')->constrained('companies');
             $table->string('image_url');
             $table->timestamps();
         });
