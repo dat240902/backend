@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RestrictAdminOnly;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class CompanyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['destroy', 'update']);
+        $this->middleware('auth:sanctum')->only(['store', 'destroy', 'update']);
         $this->middleware(RestrictAdminOnly::class)->only(['store', 'destroy']);    
     }
     /**
