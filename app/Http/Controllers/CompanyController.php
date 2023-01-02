@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RestrictAdminOnly;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
