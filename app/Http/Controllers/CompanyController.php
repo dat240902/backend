@@ -47,6 +47,7 @@ class CompanyController extends Controller
     public function show(int $id)
     {
         $company = Company::findOrFail($id);
+        $company->load('images');
         return $company;
     }
 
