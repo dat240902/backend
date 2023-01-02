@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof PDOException) {
-            echo $e;
+            echo $e->getMessage();
             return response()->json([
                 'success' => 'false',
                 'message' => 'Something wrong happened',

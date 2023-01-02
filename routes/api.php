@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobSeekerController;
+use App\Http\Controllers\ReviewController;
 use App\Models\JobSeeker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('jobseekers', JobSeekerController::class);
 Route::apiResource('companies', CompanyController::class);
 Route::apiResource('jobs', JobController::class);
+Route::apiResource('reviews', ReviewController::class);
 
 Route::post('companies/{company_id}/jobs/', [JobController::class, 'createJob']);
 
