@@ -21,6 +21,10 @@ class JobSeeker extends Authenticatable
 
     protected $hidden = ['password', 'role'];
 
+    public function applications() {
+        return $this->hasMany(Application::class, 'jobseeker_id');
+    }    
+
     public static function createEntry($data) {
         $data['password'] = Hash::make($data['password']);
         return JobSeeker::create($data);

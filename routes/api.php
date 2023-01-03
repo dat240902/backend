@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyImageController;
@@ -36,6 +37,7 @@ Route::apiResource('companies', CompanyController::class);
 Route::apiResource('jobs', JobController::class);
 Route::apiResource('reviews', ReviewController::class);
 Route::apiResource('images', CompanyImageController::class);
+Route::apiResource('applications', ApplicationController::class);
 
 Route::post('companies/{company_id}/jobs/', [JobController::class, 'createJob']);
 

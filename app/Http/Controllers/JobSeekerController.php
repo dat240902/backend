@@ -48,6 +48,7 @@ class JobSeekerController extends Controller
     public function show(int $id)
     {
         $jobSeeker = JobSeeker::findOrFail($id);
+        $jobSeeker->load('applications');
         return $jobSeeker;
     }
 

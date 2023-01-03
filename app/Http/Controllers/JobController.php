@@ -75,6 +75,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);    //
         $job->load('company');
+        $job->load('applications');
         return $job;
     }
 
