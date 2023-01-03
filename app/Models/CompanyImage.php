@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyImage extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['company_id', 'image_url'];
 }

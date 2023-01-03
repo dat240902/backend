@@ -22,7 +22,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::with('images')->get();
+        return Company::with('images:company_id,image_url')->get();
     }
 
     /**

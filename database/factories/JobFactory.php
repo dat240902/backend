@@ -18,7 +18,7 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->title(),
+            'title' => fake()->jobTitle(),
             'description' => fake()->text(),
             'benefits' => fake()->text(),
             'address' => fake()->address(),

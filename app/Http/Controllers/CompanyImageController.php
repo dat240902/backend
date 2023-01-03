@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyImageStoreRequest;
 use App\Models\CompanyImage;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CompanyImageController extends Controller
      */
     public function index()
     {
-        //
+        return CompanyImage::all();
     }
 
     /**
@@ -23,20 +24,23 @@ class CompanyImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyImageStoreRequest $request)
     {
-        //
+        $data = $request->all();
+        $companyImage = CompanyImage::create($data);
+        return $companyImage;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CompanyImage  $companyImage
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(CompanyImage $companyImage)
+    public function show(int $id)
     {
-        //
+        $companyImage = CompanyImage::findOrFail($id);
+        return $companyImage;
     }
 
     /**
@@ -46,19 +50,23 @@ class CompanyImageController extends Controller
      * @param  \App\Models\CompanyImage  $companyImage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyImage $companyImage)
+    public function update(Request $request, int $id)
     {
-        //
+        $companyImage = CompanyImage::findOrFail($id);
+        $companyImage->update($request->all());
+        return $companyImage;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CompanyImage  $companyImage
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CompanyImage $companyImage)
+    public function destroy(int $id)
     {
-        //
+        $companyImage = CompanyImage::findOrFail($id);
+        $companyImage->delete();
+        return response()->json(["success" => "true"], 204);
     }
 }
