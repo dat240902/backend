@@ -48,6 +48,7 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
         $company->load('images');
+        $company->load('jobs');
         return $company;
     }
 
