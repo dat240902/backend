@@ -39,7 +39,7 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        return $application;
+        return $application::with(['jobseeker', 'job'])->get();
     }
 
     /**
