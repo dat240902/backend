@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RestrictAdminOnly;
 use App\Http\Requests\ApplicationStoreRequest;
 use App\Models\Application;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['index', 'store', 'show', 'destroy']);    
+        
+        $this->middleware(RestrictAdminOnly::class)->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +35,12 @@ class ApplicationController extends Controller
     public function store(ApplicationStoreRequest $request)
     {
         $data = $request->all();
+        if ($request->user()->id != $data['jobseeker_id']) {
+            return response()->json([
+               'message' => 'Permission denied' 
+            ], 401);
+        }
+
         $application = Application::create($data);
         return $application;
     }

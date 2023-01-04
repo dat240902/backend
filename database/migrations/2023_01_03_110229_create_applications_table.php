@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_id')->constrained('jobs');
             $table->foreignId('jobseeker_id')->constrained('job_seekers');
+            $table->string('educations')->nullable();
+            $table->string('experiences')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('qualifications')->nullable();
             $table->timestamps();
 
             $table->unique(['job_id', 'jobseeker_id']);
