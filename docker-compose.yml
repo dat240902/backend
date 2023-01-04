@@ -1,0 +1,42 @@
+version: '3.4'
+services:
+
+  #PHP Service
+  app:
+    # image: laravel-api
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - laravel-api
+ 
+
+  #Nginx Service
+  webserver:
+    image: nginx:1.17-alpine
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel-api
+    
+  # Mysql database
+  database:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=240902
+      - MYSQL_DATABASE=laravel_api
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=240902
+    ports:
+      - "9906:3306"
+    networks:
+      - laravel-api
+
+networks:
+  laravel-api:
