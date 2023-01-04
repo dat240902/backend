@@ -23,7 +23,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return Application::all();
+        return Application::with(['jobseeker', 'job'])->get();
     }
 
     /**
