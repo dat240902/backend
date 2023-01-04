@@ -41,7 +41,13 @@ class ApplicationController extends Controller
             ], 401);
         }
 
-        $application = Application::create($data);
+        $application = Application::firstOrNew([
+            'jobseeker_id' => $data['jobseeker_id'],
+            'job_id' => $data['job_id']
+        ]);
+
+        $application->update($data);
+        $application->save();
         return $application;
     }
 
