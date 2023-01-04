@@ -16,7 +16,8 @@ class JobSeeker extends Authenticatable
     protected $fillable = [
         'name', 'email',
         'password', 'resume_url',
-        'avatar_url', 'gender', 'status'
+        'avatar_url', 'gender', 'status',
+        'educations', 'experiences', 'skills', 'qualifications'
     ];
 
     protected $hidden = ['password', 'role'];

@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('avatar_url')->default('');
             $table->smallInteger('gender')->default(0);
             // 0 -> normal user, 1 -> admin
+            $table->string('educations')->nullable();
+            $table->string('experiences')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('qualifications')->nullable();
             $table->smallInteger('role')->default(0);
             $table->string('status')->default('free');
             $table->timestamps();

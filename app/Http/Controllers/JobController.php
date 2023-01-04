@@ -11,7 +11,7 @@ class JobController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only('store', 'createJob');    
+        $this->middleware('auth:sanctum')->only('getJobApplicant', 'store', 'createJob');    
     }
     /**
      * Display a listing of the resource.
@@ -116,5 +116,21 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
         $job->delete();
         return response()->json(["success" => "true"], 204);
+    }
+
+    public function getJobApplicant(Request $request, int $id) {
+        $company = $request->user();
+        $job = Job::findOrFail($id);    //
+        $job->load('company');
+
+        echo($job->company->id);
+        if ($company->id != $job->company->id) {
+            return response()->json([
+               'message' => 'Permission denied' 
+            ], 401);
+        }
+
+        $job->load('applications.jobseeker');
+        return $job;
     }
 }

@@ -42,3 +42,5 @@ Route::apiResource('applications', ApplicationController::class);
 Route::post('companies/{company_id}/jobs/', [JobController::class, 'createJob']);
 
 Route::get('companies/{company_id}/jobs/', [JobController::class, 'showJobsInCompany']);
+
+Route::get('jobs/{id}/applications', [JobController::class, 'getJobApplicant']);

@@ -12,4 +12,8 @@ class Application extends Model
     protected $table = 'applications';
 
     protected $fillable = ['job_id', 'jobseeker_id'];
+
+    public function jobseeker() {
+        return $this->belongsTo(JobSeeker::class, 'jobseeker_id');
+    }
 }
