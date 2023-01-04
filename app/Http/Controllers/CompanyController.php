@@ -95,6 +95,7 @@ class CompanyController extends Controller
         $company->load('images');
         $company->load('jobs');
         $company->load('jobs.applications');
+        $company->load('jobs.applications.jobseeker');
         return $company;
 
     }
