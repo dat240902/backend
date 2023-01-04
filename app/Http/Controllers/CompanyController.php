@@ -12,7 +12,7 @@ class CompanyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['store', 'destroy', 'update']);
+        $this->middleware('auth:sanctum')->only(['store', 'destroy', 'update', 'getApplications']);
         $this->middleware(RestrictAdminOnly::class)->only(['store', 'destroy']);    
     }
     /**
@@ -82,5 +82,20 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $company->delete();
         return response()->json(["success" => "true"], 204);
+    }
+
+    public function getApplications(Request $request, int $id) {
+        if ($id != $request->user()->id) {
+            return response()->json([
+               'message' => 'Permission denied' 
+            ], 401);
+        }
+
+        $company = Company::findOrFail($id);
+        $company->load('images');
+        $company->load('jobs');
+        $company->load('jobs.applications');
+        return $company;
+
     }
 }
