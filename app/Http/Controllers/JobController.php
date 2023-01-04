@@ -123,7 +123,6 @@ class JobController extends Controller
         $job = Job::findOrFail($id);    //
         $job->load('company');
 
-        echo($job->company->id);
         if ($company->id != $job->company->id) {
             return response()->json([
                'message' => 'Permission denied' 
